@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gsap animation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<!-- 구글 웹폰트 roboto -->
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
+    body {
+        color: #fff;
+        font-family: "Roboto", sans-serif;
+        font-weight: 100;
+         font-style: normal;
+        /* background-color: #111; */
+        background: linear-gradient(45deg, #ff9966, #ff5e62);
+    }
+    #parallax__title {
+        position: fixed;
+        left: 20px;
+        top: 20px;
+        z-index: 1000;
+    }
+    #parallax__title h1 {
+        font-size: 40px;
+        border-bottom: 1px dashed #fff;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        font-weight: 400;
+        display: inline-block;
+    }
+    #parallax__title p {
+        font-size: 16px;
+    }
+    #parallax__title ul {
+        margin-top: 10px;
+    }
+    #parallax__title li {
+        display: inline;
+    }
+    #parallax__title li a {
+        width: 20px; 
+        height: 20px;
+        border-radius: 50%;
+        border: 1px dashed #fff;
+        display: inline-block;
+        text-align: center;
+        line-height: 20px;
+        font-size: 12px;
+    }
+    #parallax__title li.active a {
+        background: #fff;
+        color: #000;
+    }
+    #parallax__nav {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+        z-index: 1000;
+        background-color: rgba(255,255,255,0.4);
+        padding: 15px 20px;
+        border-radius: 50px;
+    }
+    #parallax__nav li {
+        list-style: none;
+        display: inline;
+    }
+    #parallax__nav li a {
+        display: inline-block;
+        width: 30px; 
+        height: 30px;
+        padding: 5px;
+        text-align: center;
+        line-height: 30px;
+    }
+    #parallax__nav li a.active {
+        background: #fff;
+        color: #000;
+        border-radius: 50%;
+    }
+
+    /* parallax__cont */
+    #parallax__cont {
+        max-width: 1600px;
+        width: 98%;
+        margin: 0 auto;
+    }
+    .parallax__item {
+        width: 1000px;
+        max-width: 70vw;
+        margin: 30vw auto;
+        text-align: left;
+        margin-right: 0;
+        position: relative;
+        padding-top: 15vw;
+    }
+    .parallax__item:nth-child(even) {
+        margin-left: 0;
+        text-align: right;
+    }
+    .parallax__item__num {
+        font-size: 35vw;
+        position: absolute;
+        left: -5vw;
+        top: -13vw;
+        opacity: 0.07;
+
+    }
+    .parallax__item:nth-child(even) .parallax__item__num {
+        left: auto;
+        right: -5vw;
+    }
+    .parallax__item__title {
+        padding-bottom: 5px;
+        font-weight: 400;
+    }
+    .parallax__item__imgWrap {
+        width: 100%;
+        padding-bottom: 56.25%;
+        background: #000;
+        position: relative;
+        overflow: hidden;
+    }
+    .parallax__item__img {
+        position: absolute;
+        left: -5%; 
+        top: -5%;
+        width: 110%;
+        height: 110%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        filter: saturate(0%);
+        transition: all 1s;
+    }
+    .parallax__item__img:hover {
+        filter: saturate(100%);
+        transform: scale(1.025);
+    }
+    #section1 .parallax__item__img {
+        background-image: url(img/p1.jpg);
+    }
+    #section2 .parallax__item__img {
+        background-image: url(img/p2.jpg);
+    }
+    #section3 .parallax__item__img {
+        background-image: url(img/p3.jpg);
+    }
+    #section4 .parallax__item__img {
+        background-image: url(img/p4.jpg);
+    }
+    #section5 .parallax__item__img {
+        background-image: url(img/p5.jpg);
+    }
+    #section6 .parallax__item__img {
+        background-image: url(img/p6.jpg);
+    }
+    #section7 .parallax__item__img {
+        background-image: url(img/p7.jpg);
+    }
+    #section8 .parallax__item__img {
+        background-image: url(img/p8.jpg);
+    }
+    #section9 .parallax__item__img {
+        background-image: url(img/p9.jpg);
+    }
+    .parallax__item__desc {
+        font-size: 1vw;
+        line-height: 1.4;
+        margin-top: -5vw;
+        margin-left: -4vw;
+        z-index: 100;
+        position: relative;
+    }
+    .parallax__item:nth-child(even) .parallax__item__desc {
+        margin-left: auto;
+        margin-right: -4vw;
+    }
+</style>
+
+</head>
+<body>
+  <header id="parallax__title">
+    <h1>UI/UX PORTFOLIO</h1>
+    <p>UI/UX DESIGNER SONG H.K</p>
+</header>
+<!-- //parallax__title  -->
+
+<nav id="parallax__nav">
+    <ul>
+        <li><a href="#section1" class="active">01</a></li>
+        <li><a href="#section2">02</a></li>
+        <li><a href="#section3">03</a></li>
+        <li><a href="#section4">04</a></li>
+        <li><a href="#section5">05</a></li>
+        <li><a href="#section6">06</a></li>
+        <li><a href="#section7">07</a></li>
+        <li><a href="#section8">08</a></li>
+        <li><a href="#section9">09</a></li>
+    </ul>
+</nav>
+<!-- //parallax__nav -->
+
+<main id="parallax__cont">
+    <section id="section1" class="parallax__item">
+        <span class="parallax__item__num">01</span>
+        <h2 class="parallax__item__title">project1</h2>
+        <figure class="parallax__item__imgWrap">
+            <div class="parallax__item__img"></div>
+        </figure>
+        <p class="parallax__item__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo doloremque officiis consequuntur aliquid obcaecati voluptates ad corrupti repellat asperiores, odio eligendi, nesciunt quos mollitia laboriosam repudiandae nobis accusantium praesentium voluptate!</p>
+    </section>
+    <!-- //section1 -->
+
+    <section id="section2" class="parallax__item">
+        <span class="parallax__item__num">02</span>
+        <h2 class="parallax__item__title">project2</h2>
+        <figure class="parallax__item__imgWrap">
+            <div class="parallax__item__img"></div>
+        </figure>
+        <p class="parallax__item__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo doloremque officiis consequuntur aliquid obcaecati voluptates ad corrupti repellat asperiores, odio eligendi, nesciunt quos mollitia laboriosam repudiandae nobis accusantium praesentium voluptate!.</p>
+    </section>
+    <!-- //section2 -->
+
+    <section id="section3" class="parallax__item">
+        <span class="parallax__item__num">03</span>
+        <h2 class="parallax__item__title">project3</h2>
+        <figure class="parallax__item__imgWrap">
+            <div class="parallax__item__img"></div>
+        </figure>
+        <p class="parallax__item__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo doloremque officiis consequuntur aliquid obcaecati voluptates ad corrupti repellat asperiores, odio eligendi, nesciunt quos mollitia laboriosam repudiandae nobis accusantium praesentium voluptate!</p>
+    </section>
+    <!-- //section3 -->
+
+    <section id="section4" class="parallax__item">
+        <span class="parallax__item__num">04</span>
+        <h2 class="parallax__item__title">project4</h2>
+        <figure class="parallax__item__imgWrap">
+            <div class="parallax__item__img"></div>
+        </figure>
+        <p class="parallax__item__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo doloremque officiis consequuntur aliquid obcaecati voluptates ad corrupti repellat asperiores, odio eligendi, nesciunt quos mollitia laboriosam repudiandae nobis accusantium praesentium voluptate!</p>
+    </section>
+    <!-- //section4 -->
+
+    <section id="section5" class="parallax__item">
+        <span class="parallax__item__num">05</span>
+        <h2 class="parallax__item__title">project5</h2>
+        <figure class="parallax__item__imgWrap">
+            <div class="parallax__item__img"></div>
+        </figure>
+        <p class="parallax__item__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo doloremque officiis consequuntur aliquid obcaecati voluptates ad corrupti repellat asperiores, odio eligendi, nesciunt quos mollitia laboriosam repudiandae nobis accusantium praesentium voluptate!</p>
+    </section>
+    <!-- //section5 -->
+
+    <section id="section6" class="parallax__item">
+        <span class="parallax__item__num">06</span>
+        <h2 class="parallax__item__title">project6</h2>
+        <figure class="parallax__item__imgWrap">
+            <div class="parallax__item__img"></div>
+        </figure>
+        <p class="parallax__item__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo doloremque officiis consequuntur aliquid obcaecati voluptates ad corrupti repellat asperiores, odio eligendi, nesciunt quos mollitia laboriosam repudiandae nobis accusantium praesentium voluptate!</p>
+    </section>
+    <!-- //section6 -->
+
+    <section id="section7" class="parallax__item">
+        <span class="parallax__item__num">07</span>
+        <h2 class="parallax__item__title">project7</h2>
+        <figure class="parallax__item__imgWrap">
+            <div class="parallax__item__img"></div>
+        </figure>
+        <p class="parallax__item__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo doloremque officiis consequuntur aliquid obcaecati voluptates ad corrupti repellat asperiores, odio eligendi, nesciunt quos mollitia laboriosam repudiandae nobis accusantium praesentium voluptate!</p>
+    </section>
+    <!-- //section7 -->
+
+    <section id="section8" class="parallax__item">
+        <span class="parallax__item__num">08</span>
+        <h2 class="parallax__item__title">project8</h2>
+        <figure class="parallax__item__imgWrap">
+            <div class="parallax__item__img"></div>
+        </figure>
+        <p class="parallax__item__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo doloremque officiis consequuntur aliquid obcaecati voluptates ad corrupti repellat asperiores, odio eligendi, nesciunt quos mollitia laboriosam repudiandae nobis accusantium praesentium voluptate!</p>
+    </section>
+    <!-- //section8 -->
+
+    <section id="section9" class="parallax__item">
+        <span class="parallax__item__num">09</span>
+        <h2 class="parallax__item__title">section9</h2>
+        <figure class="parallax__item__imgWrap">
+            <div class="parallax__item__img"></div>
+        </figure>
+        <p class="parallax__item__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo doloremque officiis consequuntur aliquid obcaecati voluptates ad corrupti repellat asperiores, odio eligendi, nesciunt quos mollitia laboriosam repudiandae nobis accusantium praesentium voluptate!</p>
+    </section>
+    <!-- //section9 -->
+</main>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/ScrollToPlugin.min.js"></script>
+  <script>
+    let links = gsap.utils.toArray("#parallax__nav ul li a");
+
+links.forEach(link => {
+    let element = document.querySelector(link.getAttribute("href")),
+    
+    linkST = ScrollTrigger.create({
+        trigger: element,
+        start: "top top"
+    });
+
+    ScrollTrigger.create({
+        trigger: element,
+        start: "top center",
+        end: "bottom center",
+        onToggle: self => setActive(link)
+    });
+
+    link.addEventListener("click", e => {
+        e.preventDefault();
+        gsap.to(window, {duration: 1, scrollTo: linkST.start, overwrite: "auto"});
+    });
+});
+
+function setActive(link) {
+    links.forEach(el => el.classList.remove("active"));
+    link.classList.add("active");
+}
+/*
+. `gsap.utils.toArray()`를 사용하여 네비게이션 메뉴의 링크를 선택합니다.
+2. 각 링크에 대해 반복하면서:
+   - 해당 링크의 `href` 속성을 사용하여 해당 섹션 요소를 선택합니다.
+   - `ScrollTrigger.create()`를 사용하여 스크롤 트리거를 생성하고, 해당 섹션이 화면 상단에 도달할 때 트리거가 발생하도록 설정합니다.
+   - 스크롤 트리거의 `onToggle` 이벤트 핸들러를 설정하여 해당 섹션이 화면에 나타날 때 네비게이션 메뉴의 활성 링크를 변경합니다.
+   - 링크를 클릭할 때 해당 섹션으로 스크롤되도록 설정합니다.
+3. `setActive()` 함수를 정의하여 활성화된 링크에 'active' 클래스를 추가하고, 나머지 링크에는 이 클래스를 제거합니다.
+
+이러한 방식으로 코드는 페이지의 섹션을 스크롤할 때마다 네비게이션 메뉴를 업데이트하고, 링크를 클릭하면 해당 섹션으로 스크롤되도록 합니다.
+
+
+
+
+*/
+  </script>
+
+</body>
+</html>
